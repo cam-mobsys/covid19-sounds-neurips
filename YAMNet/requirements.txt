@@ -1,0 +1,4 @@
+numpy
+tensorflow>=2.5
+resampy
+pysoundfile

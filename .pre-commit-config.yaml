@@ -1,0 +1,72 @@
+default_stages:
+  - commit
+  - push
+
+repos:
+  # the default pre-commit hooks, we use most of them
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 'v4.0.1'
+    hooks:
+      # check if symlinks point to nothing
+      - id: check-symlinks
+      # forbid files which have a UTF-8 byte-order marker
+      - id: fix-byte-order-marker
+      # for filenames that would conflict in case-insensitive fs (e.g. HFS+, FAT)
+      - id: check-case-conflict
+      # check all json file syntax
+      - id: check-json
+      # check all yaml file syntax
+      - id: check-yaml
+      # check all toml file syntax
+      - id: check-toml
+      # ensure graceful EoL in each file.
+      - id: end-of-file-fixer
+      # ensure no trailing whitespaces exist
+      - id: trailing-whitespace
+      # fixed mixed line endings
+      - id: mixed-line-ending
+      # check if the code is it valid Python
+      - id: check-ast
+      # Check for debugger imports and py37+ breakpoint() calls
+      # in python source.
+      - id: debug-statements
+      # this detects private keys and avoids them being committed
+      - id: detect-private-key
+      # sort file contents
+      - id: file-contents-sorter
+      # check json format and make it pretty
+      - id: pretty-format-json
+        args: ["--autofix"]
+  - repo: https://github.com/jumanjihouse/pre-commit-hooks
+    rev: 2.1.5  # or specific git tag
+    hooks:
+      - id: fasterer
+      - id: git-check  # Configure in .gitattributes
+      - id: markdownlint # Configure in .mdlrc
+      - id: shfmt
+  # ensure code is black compliant
+  - repo: https://github.com/psf/black
+    rev: '21.9b0'
+    hooks:
+      - id: black
+  # statically populates the `known_third_party` config of `isort`
+  - repo: https://github.com/asottile/seed-isort-config
+    rev: 'v2.2.0'
+    hooks:
+      - id: seed-isort-config
+  # fetch the isort package
+  - repo: https://github.com/PyCQA/isort
+    rev: '5.9.3'
+    hooks:
+      - id: isort
+  # run flake8 and make sure it passes
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: '3.9.2'
+    hooks:
+      - id: flake8
+  # add autoflakes
+  - repo: https://github.com/myint/autoflake
+    rev: v1.4
+    hooks:
+      - id: autoflake
+        args: [ '--in-place', '--remove-all-unused-imports', '--ignore-init-module-imports']
