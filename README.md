@@ -17,9 +17,9 @@ the project website [here][1]. If you wish to contact the team, you can do so at
 Naturally, data of such origin are sensitive in nature. Thus, to gain access to the full dataset, a Data
 Transfer Agreement (DTA) needs to be signed. However, in order to enable reproducibility easier we make available two
 small subsets used for the main tasks in the paper and are available upon reasonable request. Moreover, we provide the
-metadata and overall statistics of the dataset in [this][2] notebook. The input files for this notebook include raw 
-location information and therefore cannot be shared for privacy reasons (_country-level_ statistics are abailable upon 
-reasonable request). Further, a notebook with more granular information regarding the samples of each platform is 
+metadata and overall statistics of the dataset in [this][2] notebook. The input files for this notebook include raw
+location information and therefore cannot be shared for privacy reasons (_country-level_ statistics are abailable upon
+reasonable request). Further, a notebook with more granular information regarding the samples of each platform is
 provided [here][3].
 
 ## Code
