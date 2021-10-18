@@ -86,6 +86,7 @@ def get_web(uid, COVID):  # date
     data.append({"breath": breath, "cough": cough, "voice": voice, "label": COVID})
     return data
 
+
 # create directory to store Pickled data if it doesn't exist
 if not os.path.exists("./data"):
     os.mkdir("./data")
