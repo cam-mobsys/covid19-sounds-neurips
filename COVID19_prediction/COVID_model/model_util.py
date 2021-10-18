@@ -7,11 +7,11 @@ Created on Wed Sep  9 17:18:28 2020
 from __future__ import print_function
 
 import random
-import requests
 
 import joblib
 import numpy as np
 import pandas as pd
+import requests
 from sklearn import metrics
 
 SR = 16000  # sample rate

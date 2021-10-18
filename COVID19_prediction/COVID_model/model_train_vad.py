@@ -205,8 +205,8 @@ def main(_):
     with tf.Session(graph=_add_triaining_graph(), config=sess_config) as sess:
 
         # op and tensors
-        dropout_on = np.array([True], dtype=np.bool)
-        dropout_off = np.array([False], dtype=np.bool)
+        # dropout_on = np.array([True], dtype=np.bool)
+        # dropout_off = np.array([False], dtype=np.bool)
         vgg_tensor = sess.graph.get_tensor_by_name(params.VGGISH_INPUT_TENSOR_NAME)
         index_tensor = sess.graph.get_tensor_by_name("mymodel/index:0")
         index2_tensor = sess.graph.get_tensor_by_name("mymodel/index2:0")
