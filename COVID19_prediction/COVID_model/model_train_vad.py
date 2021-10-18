@@ -110,7 +110,6 @@ def model_summary():
 def _create_data():
     """Create audio `train`, `test` and `val` records file."""
     tf.logging.info("Create records..")
-    _check_vggish_ckpt_exists()
     train, val, test = util.load_data(data_dir, FLAGS["is_aug"])
     tf.logging.info("Dataset size: Train-{} Test-{} Val-{}".format(len(train), len(test), len(val)))
     return train, val, test
@@ -214,7 +213,6 @@ def main(_):
         dropout_tensor = sess.graph.get_tensor_by_name("mymodel/dropout_rate:0")
         logit_tensor = sess.graph.get_tensor_by_name("mymodel/Output/prediction:0")
         logitsym_tensor = sess.graph.get_tensor_by_name("mymodel/symptom/prediction_sym:0")
-        traning_on = sess.graph.get_tensor_by_name("mymodel/training:0")
         symptom_tensor = sess.graph.get_tensor_by_name("train/symptoms:0")
         labels_tensor = sess.graph.get_tensor_by_name("train/labels:0")
         global_step_tensor = sess.graph.get_tensor_by_name("train/global_step:0")
@@ -233,6 +231,7 @@ def main(_):
         init = tf.global_variables_initializer()
         sess.run(init)
         if not FLAGS["disable_checkpoint"]:
+            _check_vggish_ckpt_exists()
             load_vggish_slim_checkpoint(sess, params.VGGISH_CHECKPOINT)
 
         print(FLAGS)
@@ -283,7 +282,6 @@ def main(_):
                     ],
                     feed_dict={
                         vgg_tensor: vggcomb,  # Mel-spetrugram
-                        traning_on: dropout_on,  # traning on
                         index_tensor: index,  # breath,cough
                         index2_tensor: index2,  # voice
                         dropout_tensor: [[FLAGS["dropout_rate"]]],  # traning dropour rate
@@ -345,7 +343,6 @@ def main(_):
                     [logit_tensor, logitsym_tensor, loss_tensor, cla_loss_tensor, reg_loss_tensor],
                     feed_dict={
                         vgg_tensor: vggcomb,
-                        traning_on: dropout_off,  # traning off
                         index_tensor: index,
                         index2_tensor: index2,
                         dropout_tensor: [[1.0]],
@@ -423,7 +420,6 @@ def main(_):
                     [logit_tensor, logitsym_tensor, loss_tensor, cla_loss_tensor, reg_loss_tensor],
                     feed_dict={
                         vgg_tensor: vggcomb,
-                        traning_on: dropout_off,  # traning off
                         index_tensor: index,
                         index2_tensor: index2,
                         dropout_tensor: [[1.0]],

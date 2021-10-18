@@ -55,7 +55,6 @@ def define_audio_slim(
         index = tf.placeholder(dtype=tf.int32, shape=(1, 1), name="index")  # split B C V
         index2 = tf.placeholder(dtype=tf.int32, shape=(1, 1), name="index2")
         dropout_keep_prob = tf.placeholder(tf.float32, name="dropout_rate")
-        # training_on = tf.placeholder(dtype=tf.bool, shape=(1,), name="training")
 
         if "B" in modality:
             with tf.name_scope("Breath"):

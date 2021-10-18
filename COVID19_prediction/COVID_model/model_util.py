@@ -7,6 +7,7 @@ Created on Wed Sep  9 17:18:28 2020
 from __future__ import print_function
 
 import random
+import requests
 
 import joblib
 import numpy as np
@@ -438,6 +439,16 @@ def maybe_create_directory(dirname):
     """Check directory exists or create it."""
     if not os.path.exists(dirname):
         os.makedirs(dirname)
+
+
+def maybe_download(url, dirname):
+    """Check resource exists or download it"""
+    resource_name = url.split("/")[-1]
+    resource_dest = os.path.join(dirname, resource_name)
+    if not os.path.isfile(resource_dest):
+        r = requests.get(url)
+        with open(resource_dest, "wb") as f:
+            f.write(r.content)
 
 
 # model - already trained keras model with dropout
