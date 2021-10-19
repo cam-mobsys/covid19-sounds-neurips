@@ -87,6 +87,10 @@ def get_web(uid, COVID):  # date
     return data
 
 
+# create directory to store Pickled data if it doesn't exist
+if not os.path.exists("./data"):
+    os.mkdir("./data")
+
 # pickle postive users
 COVID = 1
 data_all_covid = {}  #
@@ -102,7 +106,7 @@ for fold in ["train_covid_id", "vad_covid_id", "test_covid_id"]:
             temp = get_android(uid, COVID)
             if len(temp) > 0:
                 data_all_covid[fold][uid] = temp
-f = open("audio_0426En_covid.pk", "wb")
+f = open("./data/audio_0426En_covid.pk", "wb")
 joblib.dump(data_all_covid, f)
 f.close()
 for fold in data_all_covid:
@@ -125,6 +129,6 @@ for fold in ["train_noncovid_id", "vad_noncovid_id", "test_noncovid_id"]:
             temp = get_android(uid, COVID)
             if len(temp) > 0:
                 data_all_noncovid[fold][uid] = temp
-f = open("audio_0426En_noncovid.pk", "wb")
+f = open("./data/audio_0426En_noncovid.pk", "wb")
 joblib.dump(data_all_noncovid, f)
 f.close()

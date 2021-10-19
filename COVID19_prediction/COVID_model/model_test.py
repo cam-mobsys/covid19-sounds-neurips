@@ -194,14 +194,13 @@ def main(_):
 
         # op and tensors
         # dropout_on = np.array([True], dtype=np.bool)
-        dropout_off = np.array([False], dtype=np.bool)
+        # dropout_off = np.array([False], dtype=np.bool)
         vgg_tensor = sess.graph.get_tensor_by_name(params.VGGISH_INPUT_TENSOR_NAME)
         index_tensor = sess.graph.get_tensor_by_name("mymodel/index:0")
         index2_tensor = sess.graph.get_tensor_by_name("mymodel/index2:0")
         dropout_tensor = sess.graph.get_tensor_by_name("mymodel/dropout_rate:0")
         logit_tensor = sess.graph.get_tensor_by_name("mymodel/Output/prediction:0")
         logitsym_tensor = sess.graph.get_tensor_by_name("mymodel/symptom/prediction_sym:0")
-        traning_on = sess.graph.get_tensor_by_name("mymodel/training:0")
         symptom_tensor = sess.graph.get_tensor_by_name("train/symptoms:0")
         labels_tensor = sess.graph.get_tensor_by_name("train/labels:0")
         # global_step_tensor = sess.graph.get_tensor_by_name("train/global_step:0")
@@ -239,7 +238,6 @@ def main(_):
                 [logit_tensor, logitsym_tensor, loss_tensor, cla_loss_tensor, reg_loss_tensor],
                 feed_dict={
                     vgg_tensor: vggcomb,
-                    traning_on: dropout_off,  # traning off
                     index_tensor: index,
                     index2_tensor: index2,
                     dropout_tensor: [[1.0]],

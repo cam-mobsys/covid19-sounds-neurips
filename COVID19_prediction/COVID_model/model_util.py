@@ -11,6 +11,7 @@ import random
 import joblib
 import numpy as np
 import pandas as pd
+import requests
 from sklearn import metrics
 
 SR = 16000  # sample rate
@@ -438,6 +439,16 @@ def maybe_create_directory(dirname):
     """Check directory exists or create it."""
     if not os.path.exists(dirname):
         os.makedirs(dirname)
+
+
+def maybe_download(url, dirname):
+    """Check resource exists or download it"""
+    resource_name = url.split("/")[-1]
+    resource_dest = os.path.join(dirname, resource_name)
+    if not os.path.isfile(resource_dest):
+        r = requests.get(url)
+        with open(resource_dest, "wb") as f:
+            f.write(r.content)
 
 
 # model - already trained keras model with dropout
