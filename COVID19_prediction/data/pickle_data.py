@@ -25,8 +25,8 @@ df = pd.read_csv(inputFile)
 
 df_train_pos = df[(df["label"] == 1) & (df["fold"] == "train")]
 df_train_neg = df[(df["label"] == 0) & (df["fold"] == "train")]
-df_vad_pos = df[(df["label"] == 1) & (df["fold"] == "validatio")]
-df_vad_neg = df[(df["label"] == 0) & (df["fold"] == "validatio")]
+df_vad_pos = df[(df["label"] == 1) & (df["fold"] == "validation")]
+df_vad_neg = df[(df["label"] == 0) & (df["fold"] == "validation")]
 df_test_pos = df[(df["label"] == 1) & (df["fold"] == "test")]
 df_test_neg = df[(df["label"] == 0) & (df["fold"] == "test")]
 
