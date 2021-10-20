@@ -40,16 +40,13 @@ with open("data_0426_en_task1.csv") as f:
             if "202" in uid:
                 uid = "form-app-users"
             folder = temp[7]
-            if uid == "MJQ296DCcN" and folder == "2020-11-26-17_00_54_657915":
-                continue
+            
             print(UID, "===", folder)
             voice = temp[12]
             cough = temp[13]
             breath = temp[14]
             split = int(temp[15])
             label = int(temp[16])
-            if label == 1:
-                continue
 
             if split == 0 and label == 1:
                 fold = "train_cough_id"
@@ -107,9 +104,9 @@ with open("data_0426_en_task1.csv") as f:
                     )
 
 
-# f = open('audio_0426En_cough.pk', 'wb')
-# joblib.dump(data_all_cough, f)
-# f.close()
+f = open('audio_0426En_cough.pk', 'wb')
+joblib.dump(data_all_cough, f)
+f.close()
 
 f = open("audio_0426En_health.pk", "wb")
 joblib.dump(data_all_health, f)
