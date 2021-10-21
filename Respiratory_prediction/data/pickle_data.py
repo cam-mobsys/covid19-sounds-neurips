@@ -40,7 +40,7 @@ with open("data_0426_en_task1.csv") as f:
             if "202" in uid:
                 uid = "form-app-users"
             folder = temp[7]
-            
+
             print(UID, "===", folder)
             voice = temp[12]
             cough = temp[13]
@@ -104,7 +104,7 @@ with open("data_0426_en_task1.csv") as f:
                     )
 
 
-f = open('audio_0426En_cough.pk', 'wb')
+f = open("audio_0426En_cough.pk", "wb")
 joblib.dump(data_all_cough, f)
 f.close()
 
